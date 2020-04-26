@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="src/css/style.css">
+
+    <title>JQuery. Product Table</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Search box Row -->
+        <div class="row mb-3">
+            <div class="col p-0">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="search..." id="searchBox">
+                    <button class="btn btn-outline-secondary ml-3" type="button" id="searchButton">Search</button>
+                </div>
+            </div>
+            <div class="col-sm p-0">
+                <button class="btn btn-outline-secondary float-right addButton" type="button">Add new</button>
+            </div>
+        </div>
+        <!-- Table Row -->
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th data-title="Name">Name
+                            </th>
+                            <th data-title="Price">Price
+                            </th>
+                            <th data-title="Actions">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="products">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Modal box Row -->
+        <div class="modalWrap">
+            <div class="modalProductInfo p-3 w-50">
+                <h4>Product Name<span class="modalPICross float-right">&#10005;</span></h4>
+                <hr>
+                <div class="form-group">
+                    <label>Name: *</label>
+                    <input class="form-control" id="nameIn" type="text">
+                    <small class="form-text text-muted" id="nameTip">Name length must be between 5 and 15
+                        characters</small>
+                </div>
+                <div class="form-group">
+                    <label>Supplier email: *</label>
+                    <input class="form-control " id="emailIn" type="text">
+                    <small class="form-text text-muted " id="emailTip">Please provide us with real email</small>
+                </div>
+                <div class="form-group">
+                    <label>Count *</label>
+                    <input class="form-control w-50 " id="countIn" type="text">
+                    <small class="form-text text-muted" id="countTip">Count must be >0</small>
+                </div>
+                <div class="form-group">
+                    <label>Price *</label>
+                    <input class="form-control" id="priceIn" type="text">
+                    <small class="form-text text-muted" id="priceTip">Price must be >0</small>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="sel1">Delivery:</label>
+                            <select class="form-control" id="delCountrySel">
+                                <option></option>
+                                <option>Russia</option>
+                                <option>Belorus</option>
+                                <option>USA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col" id="cityCheckBoxes">
+                        <div class="cityCheckBoxesClass cityRussia">
+                            <input class="rusCity" type="checkbox"><span id="delCitySelText1">Saratov</span><br>
+                            <input class="rusCity" type="checkbox"><span id="delCitySelText2">Moskow</span><br>
+                            <input class="rusCity" type="checkbox"><span id="delCitySelText3">St.Petersburg</span>
+                        </div>
+                        <div class="cityCheckBoxesClass cityBelorus">
+                            <input class="belCity" id="delCitySel1" type="checkbox"><span
+                                id="delCitySelText1">Minsk</span><br>
+                            <input class="belCity" id="delCitySel2" type="checkbox"><span
+                                id="delCitySelText2">Gomel</span><br>
+                            <input class="belCity" id="delCitySel3" type="checkbox"><span
+                                id="delCitySelText3">Vitebsk</span>
+                        </div>
+                        <div class="cityCheckBoxesClass cityUSA">
+                            <input class="usaCity" id="delCitySel1" type="checkbox"><span id="delCitySelText1">New
+                                York</span><br>
+                            <input class="usaCity" id="delCitySel2" type="checkbox"><span id="delCitySelText2">Los
+                                Angeles</span><br>
+                            <input class="usaCity" id="delCitySel3" type="checkbox"><span
+                                id="delCitySelText3">Miami</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <button class="btn btn-outline-secondary saveButton ml-5 mr-5">Save changes</button>
+                    <button class="btn btn-outline-secondary float-right cancelButton">Cancel</button>
+                </div>
+            </div>
+            <div class="modalSure p-5">
+                <h4>Are you sure?</h4>
+                <hr>
+                <span>Are you sure you want to delete <span class="deleteItemTitle"></span> ?</span>
+                <div class="modalSure-buttons mt-3">
+                    <button class="btn btn-danger float-left deleteItemYes">Yes</button>
+                    <button class="btn btn-outline-secondary float-right deleteItemNo">No</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+
+    <script src="src/js/main.js"></script>
+</body>
+
+</html>
